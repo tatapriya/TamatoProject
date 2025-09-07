@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FreshTomato{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
+    {% if session.user %}
+    <!-- Navigation for logged-in users -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-red-600">🍅 FreshTomato</h1>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="{{ url_for('dashboard') }}" class="text-gray-700 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                    
+                    {% if session.user.role == 'farmer' %}
+                        <a href="{{ url_for('products') }}" class="text-gray-700 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium">My Products</a>
+                        <a href="{{ url_for('upload_product') }}" class="text-gray-700 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium">Upload Product</a>
+                    {% elif session.user.role == 'customer' %}
+                        <a href="{{ url_for('products') }}" class="text-gray-700 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium">Products</a>
+                        <a href="{{ url_for('cart') }}" class="text-gray-700 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium">Cart</a>
+                    {% elif session.user.role == 'admin' %}
+                        <a href="{{ url_for('admin_requests') }}" class="text-gray-700 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium">User Requests</a>
+                    {% endif %}
+                    
+                    <a href="{{ url_for('orders') }}" class="text-gray-700 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium">Orders</a>
+                    
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-600">{{ session.user.username }} ({{ session.user.role }})</span>
+                        <a href="{{ url_for('logout') }}" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-messages" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md">
+                {% for category, message in messages %}
+                    <div class="mb-2 px-4 py-3 rounded shadow
+                        {% if category == 'success' %}bg-green-100 text-green-800
+                        {% elif category == 'error' %}bg-red-100 text-red-800
+                        {% elif category == 'info' %}bg-blue-100 text-blue-800
+                        {% else %}bg-gray-100 text-gray-800{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+            <script>
+                // Hide flash messages after 5 seconds (5000 ms)
+                setTimeout(function() {
+                    var flash = document.getElementById('flash-messages');
+                    if (flash) {
+                        flash.style.display = 'none';
+                    }
+                }, 5000);
+            </script>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html> 

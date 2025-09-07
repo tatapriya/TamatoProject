@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}FreshTomato - Welcome{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-red-600 via-orange-500 to-yellow-400 relative overflow-hidden">
+    <!-- Background decorations -->
+    <div class="absolute inset-0 bg-black/20"></div>
+    <div class="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
+    <div class="absolute bottom-10 right-10 w-48 h-48 bg-white/10 rounded-full blur-xl"></div>
+    
+    <div class="relative z-10 min-h-screen flex items-center justify-center p-4">
+        <div class="max-w-4xl w-full">
+            <div class="text-center text-white">
+                <h1 class="text-6xl font-bold mb-6 drop-shadow-lg">
+                    🍅 FreshTomato
+                </h1>
+                <p class="text-xl mb-8 drop-shadow-md">
+                    Connect farmers with customers for the freshest tomatoes
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-xl">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">For Farmers</h3>
+                        <p class="text-gray-600">Upload and sell your fresh tomatoes directly to customers</p>
+                    </div>
+                    
+                    <div class="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-xl">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m6 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">For Customers</h3>
+                        <p class="text-gray-600">Buy quality-rated tomatoes from local farmers</p>
+                    </div>
+                    
+                    <div class="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-xl">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">AI-Powered Rating</h3>
+                        <p class="text-gray-600">Advanced quality assessment for every tomato</p>
+                    </div>
+                </div>
+                
+                <div class="flex gap-4 justify-center flex-wrap">
+                    <a href="{{ url_for('login') }}?role=farmer" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg transition-all duration-200 transform hover:scale-105">
+                        Farmer Login
+                    </a>
+                    <a href="{{ url_for('login') }}?role=customer" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg transition-all duration-200 transform hover:scale-105">
+                        Customer Login
+                    </a>
+                    <a href="{{ url_for('login') }}?role=admin" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg transition-all duration-200 transform hover:scale-105">
+                        Admin Login
+                    </a>
+                </div>
+                
+                <div class="mt-8">
+                    <p class="text-white/80 mb-4">Don't have an account?</p>
+                    <a href="{{ url_for('register') }}" class="bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full font-medium transition-all duration-200">
+                        Register Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

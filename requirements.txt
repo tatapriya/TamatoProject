@@ -1,0 +1,7 @@
+Flask==3.0.0
+Werkzeug==3.0.1
+flask-sqlalchemy==3.0.5
+pymysql==1.1.0
+tensorflow==2.13.0
+numpy==1.24.3
+pillow==10.0.0 
